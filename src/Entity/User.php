@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -40,6 +42,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
+
+    #[ORM\ManyToMany(targetEntity: Adress::class, inversedBy: 'users')]
+    private Collection $userAdress;
+
+    public function __construct()
+    {
+        $this->userAdress = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -155,6 +165,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Adress>
+     */
+    public function getUserAdress(): Collection
+    {
+        return $this->userAdress;
+    }
+
+    public function addUserAdress(Adress $userAdress): self
+    {
+        if (!$this->userAdress->contains($userAdress)) {
+            $this->userAdress->add($userAdress);
+        }
+
+        return $this;
+    }
+
+    public function removeUserAdress(Adress $userAdress): self
+    {
+        $this->userAdress->removeElement($userAdress);
 
         return $this;
     }
