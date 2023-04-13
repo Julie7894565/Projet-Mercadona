@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,6 +34,17 @@ class Order
 
     #[ORM\Column(length: 255)]
     private ?string $trackingNumber = null;
+
+    #[ORM\ManyToOne(inversedBy: 'userOrder')]
+    private ?User $user = null;
+
+    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'orders')]
+    private Collection $orderProduct;
+
+    public function __construct()
+    {
+        $this->orderProduct = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -106,6 +119,42 @@ class Order
     public function setTrackingNumber(string $trackingNumber): self
     {
         $this->trackingNumber = $trackingNumber;
+
+        return $this;
+    }
+
+    public function getuser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setuser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getOrderProduct(): Collection
+    {
+        return $this->orderProduct;
+    }
+
+    public function addOrderProduct(Product $orderProduct): self
+    {
+        if (!$this->orderProduct->contains($orderProduct)) {
+            $this->orderProduct->add($orderProduct);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderProduct(Product $orderProduct): self
+    {
+        $this->orderProduct->removeElement($orderProduct);
 
         return $this;
     }

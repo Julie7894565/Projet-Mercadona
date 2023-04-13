@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -30,6 +32,20 @@ class Product
 
     #[ORM\Column(length: 255)]
     private ?string $picture = null;
+
+    #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'orderProduct')]
+    private Collection $orders;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Category $productCategory = null;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Promotion $productPromotion = null;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +120,57 @@ class Product
     public function setPicture(string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->addOrderProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            $order->removeOrderProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function getProductCategory(): ?Category
+    {
+        return $this->productCategory;
+    }
+
+    public function setProductCategory(?Category $productCategory): self
+    {
+        $this->productCategory = $productCategory;
+
+        return $this;
+    }
+
+    public function getProductPromotion(): ?Promotion
+    {
+        return $this->productPromotion;
+    }
+
+    public function setProductPromotion(?Promotion $productPromotion): self
+    {
+        $this->productPromotion = $productPromotion;
 
         return $this;
     }
