@@ -3,16 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Adress;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -20,6 +21,7 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
+        $adress = new Adress();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -32,7 +34,16 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            // set the adress data
+            $adress->setAdress($form->get('adress')->get('adress')->getData());
+            $adress->setPostCode($form->get('adress')->get('postcode')->getData());
+            $adress->setCity($form->get('adress')->get('city')->getData());
+            $adress->setCountry($form->get('adress')->get('country')->getData());
+            // set the user adress
+            $user->addUserAdress($adress);
+
             $entityManager->persist($user);
+            $entityManager->persist($adress);
             $entityManager->flush();
             // do anything else you need here, like send an email
 
