@@ -9,12 +9,8 @@
         {{ form_row(registrationForm.username) }}
         {{ form_row(registrationForm.name) }}
         {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.email) }}
-        
-        
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+        {{ form_row(registrationForm.email) }}        
+        {{ form_row(registrationForm.plainPassword) }}
         {{ form_row(registrationForm.RGPDConsent) }}
 
         <button type="submit" class="btn">M'inscrire</button>
