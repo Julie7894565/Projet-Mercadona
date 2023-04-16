@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Adress;
+use App\Entity\User;
 use App\Entity\Category;
 use App\Entity\Order;
 use App\Entity\Product;
@@ -25,11 +26,8 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-
         $url = $this->adminUrlGenerator->setController(UserCrudController::class)->generateUrl();
-
         return $this->redirect($url);
-        
     }
 
     public function configureDashboard(): Dashboard
@@ -40,12 +38,19 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
-        yield MenuItem::section('Categories');
+        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'app_home');
+        yield MenuItem::section('Utilisateurs');
+        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Adress', 'fas fa-map-marker-alt', Adress::class);
-        yield MenuItem::linkToCrud('Category', 'fas fa-map-marker-alt', Category::class);
-        yield MenuItem::linkToCrud('Order', 'fas fa-map-marker-alt', Order::class);
+        yield MenuItem::section('Commandes');
+        yield MenuItem::linkToCrud('Category', 'fas fa-tags', Category::class);
+        yield MenuItem::linkToCrud('Order', 'fas fa-shop', Order::class);
         yield MenuItem::linkToCrud('Product', 'fas fa-map-marker-alt', Product::class);
-        yield MenuItem::linkToCrud('Promotion', 'fas fa-map-marker-alt', Promotion::class);
+        yield MenuItem::linkToCrud('Promotion', 'fas fa-percent', Promotion::class);
     }
 }
+
+
+// Changer les noms des titres
+// Ajouter les relations sur les composants
+// Desactiver certaines options ( DELETE order, delete user ...)
