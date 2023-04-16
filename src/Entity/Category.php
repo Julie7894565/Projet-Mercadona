@@ -16,7 +16,7 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $wording = null;
+    private ?string $label = null;
 
     #[ORM\OneToMany(mappedBy: 'productCategory', targetEntity: Product::class)]
     private Collection $products;
@@ -31,14 +31,14 @@ class Category
         return $this->id;
     }
 
-    public function getWording(): ?string
+    public function getlabel(): ?string
     {
-        return $this->wording;
+        return $this->label;
     }
 
-    public function setWording(string $wording): self
+    public function setlabel(string $label): self
     {
-        $this->wording = $wording;
+        $this->label = $label;
 
         return $this;
     }
