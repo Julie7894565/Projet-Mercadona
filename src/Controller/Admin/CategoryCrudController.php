@@ -20,7 +20,7 @@ class CategoryCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnDetail()->hideOnForm(),
-            TextField::new('wording'),
+            TextField::new('label'),
         ];
     }
     

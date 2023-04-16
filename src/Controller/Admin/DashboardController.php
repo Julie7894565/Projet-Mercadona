@@ -2,10 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Adress;
+use App\Entity\address;
 use App\Entity\User;
 use App\Entity\Category;
-use App\Entity\Order;
 use App\Entity\Product;
 use App\Entity\Promotion;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,18 +38,14 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'app_home');
-        yield MenuItem::section('Utilisateurs');
+        yield MenuItem::section('Catégories');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
-        yield MenuItem::linkToCrud('Adress', 'fas fa-map-marker-alt', Adress::class);
-        yield MenuItem::section('Commandes');
-        yield MenuItem::linkToCrud('Category', 'fas fa-tags', Category::class);
-        yield MenuItem::linkToCrud('Order', 'fas fa-shop', Order::class);
-        yield MenuItem::linkToCrud('Product', 'fas fa-map-marker-alt', Product::class);
-        yield MenuItem::linkToCrud('Promotion', 'fas fa-percent', Promotion::class);
+        yield MenuItem::linkToCrud('Categories', 'fas fa-tags', Category::class);
+        yield MenuItem::linkToCrud('Produits', 'fas fa-map-marker-alt', Product::class);
+        yield MenuItem::linkToCrud('Promotions', 'fas fa-percent', Promotion::class);
     }
 }
 
 
 // Changer les noms des titres
 // Ajouter les relations sur les composants
-// Desactiver certaines options ( DELETE order, delete user ...)

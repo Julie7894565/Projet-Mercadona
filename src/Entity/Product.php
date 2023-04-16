@@ -16,13 +16,10 @@ class Product
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $wording = null;
+    private ?string $label = null;
 
     #[ORM\Column(length: 500)]
     private ?string $description = null;
-
-    #[ORM\Column]
-    private ?float $weight = null;
 
     #[ORM\Column]
     private ?float $price = null;
@@ -33,33 +30,25 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $picture = null;
 
-    #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'orderProduct')]
-    private Collection $orders;
-
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Category $productCategory = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Promotion $productPromotion = null;
 
-    public function __construct()
-    {
-        $this->orders = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getWording(): ?string
+    public function getlabel(): ?string
     {
-        return $this->wording;
+        return $this->label;
     }
 
-    public function setWording(string $wording): self
+    public function setlabel(string $label): self
     {
-        $this->wording = $wording;
+        $this->label = $label;
 
         return $this;
     }
@@ -72,18 +61,6 @@ class Product
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getWeight(): ?float
-    {
-        return $this->weight;
-    }
-
-    public function setWeight(float $weight): self
-    {
-        $this->weight = $weight;
 
         return $this;
     }
@@ -124,33 +101,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, Order>
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Order $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders->add($order);
-            $order->addOrderProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Order $order): self
-    {
-        if ($this->orders->removeElement($order)) {
-            $order->removeOrderProduct($this);
-        }
-
-        return $this;
-    }
-
     public function getProductCategory(): ?Category
     {
         return $this->productCategory;
@@ -177,6 +127,6 @@ class Product
 
     public function __toString()
     {
-        return $this->getWording();
+        return $this->getlabel();
     }
 }
