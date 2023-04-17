@@ -28,11 +28,12 @@ class ProductCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('label'),
-            TextEditorField::new('description'),
-            MoneyField::new('price')->setCurrency('EUR'),
-            ImageField::new('picture')
+            TextEditorField::new('description', 'Description'),
+            MoneyField::new('price', 'Prix')->setCurrency('EUR'),
+            ImageField::new('picture', 'Image')
                 ->setBasePath(self::PRODUCTS_BASE_PATH)
                 ->setUploadDir(self::PRODUCTS_UPLOAD_DIR),
+            AssociationField::new('productCategory', 'Catégorie'),
         ];
     } 
 }
