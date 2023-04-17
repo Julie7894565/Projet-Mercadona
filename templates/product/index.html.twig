@@ -13,7 +13,6 @@
                 <th>Description</th>
                 <th>Weight</th>
                 <th>Price</th>
-                <th>Quantity</th>
                 <th>Picture</th>
                 <th>actions</th>
             </tr>
@@ -26,7 +25,6 @@
                 <td>{{ product.description }}</td>
                 <td>{{ product.weight }}</td>
                 <td>{{ product.price }}</td>
-                <td>{{ product.quantity }}</td>
                 <td>{{ product.picture }}</td>
                 <td>
                     <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>

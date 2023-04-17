@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\address;
 use App\Entity\User;
 use App\Entity\Category;
 use App\Entity\Product;
