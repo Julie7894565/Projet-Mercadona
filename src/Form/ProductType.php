@@ -16,9 +16,7 @@ class ProductType extends AbstractType
             ->add('description')
             ->add('weight')
             ->add('price')
-            ->add('quantity')
             ->add('picture')
-            ->add('orders')
             ->add('productCategory')
             ->add('productPromotion')
         ;

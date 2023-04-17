@@ -19,7 +19,7 @@ class PromotionCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
+            IdField::new('id')->hideOnForm(),
             PercentField::new('promotionPercentage'),
             DateTimeField::new('startTime'),
             DateTimeField::new('endTime'),
