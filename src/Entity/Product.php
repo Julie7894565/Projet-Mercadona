@@ -28,7 +28,7 @@ class Product
     private ?string $picture = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
-    private ?Category $productCategory = null;
+    private ?Category $productCategory;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Promotion $productPromotion = null;
