@@ -9,9 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>label</th>
+                <th>Label</th>
                 <th>Description</th>
-                <th>Weight</th>
                 <th>Price</th>
                 <th>Picture</th>
                 <th>actions</th>
@@ -23,7 +22,6 @@
                 <td>{{ product.id }}</td>
                 <td>{{ product.label }}</td>
                 <td>{{ product.description }}</td>
-                <td>{{ product.weight }}</td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.picture }}</td>
                 <td>
@@ -33,7 +31,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
