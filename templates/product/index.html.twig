@@ -3,39 +3,48 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
-    <h1>Product index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Label</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Picture</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.label }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
-                <td><img src={{ product.picture}}</td>
-                <td>
-                    <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_product_new') }}">Create new</a>
+
+<ul>
+<li> <a href="{{ path('app_product_index') }} "> Voir toutes les catégories</a></li>
+{% for category in categories %}
+
+<li> <a href="{{ path('app_categorie_index', { 'id': category.id  }) }} "> {{ category.label }}</a></li>
+{% endfor %}
+
+</ul>
+
+
+ <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+     {% for product in products %}
+      <div class="group relative gap-8">
+        <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+          <img src="{{ product.picture}}" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+        </div>
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-gray-700">
+              <a href="#">
+                <span aria-hidden="true" class="absolute inset-0"></span>
+               {{ product.label }}
+              </a>
+            </h3>
+           </div>
+         {% if product.productPromotion.promotionPercentage is defined %}
+          <p class="mt-1 text-sm text-grey-500 line-through ">{{ product.price }} €</p>
+          {% set promoPrice = product.price * product.productPromotion.promotionPercentage  / 100 %}
+             <p class="mt-1 text-sm  text-red-500 font-bold">  {{ product.price - promoPrice}} €</p>
+             {% else %}
+           <p class="mt-1 text-sm  text-red-500 font-bold">  {{ product.price}} €</p>
+             {%endif %}
+          </div>
+          <p class="text-sm font-medium text-gray-900">{{ product.description }}</p>        
+      
+      </div>
+       {% endfor %}
+    
+
+
+
 {% endblock %}
