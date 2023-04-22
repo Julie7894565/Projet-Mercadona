@@ -6,33 +6,26 @@
     <h1>Product</h1>
 
     <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
+     <thead>
             <tr>
                 <th>Label</th>
-                <td>{{ product.label }}</td>
-            </tr>
-            <tr>
                 <th>Description</th>
-                <td>{{ product.description }}</td>
-            </tr>
-            <tr>
                 <th>Price</th>
-                <td>{{ product.price }}</td>
-            </tr>
-            <tr>
                 <th>Picture</th>
-                <td>{{ product.picture }}</td>
+                <th>Promotion</th>
             </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.label }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                    <td><img src={{ product.picture}}</td>
+                    <td>{{ promotion.promotionPercentage }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_product_index') }}">back to list</a>
-
-    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
-
-    {{ include('product/_delete_form.html.twig') }}
 {% endblock %}
