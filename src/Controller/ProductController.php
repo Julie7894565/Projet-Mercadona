@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Form\Product1Type;
+use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,13 +15,33 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/produits')]
 class ProductController extends AbstractController
 {
+
+
+    public function __construct(
+        private  ProductRepository $productRepository,
+        private  CategoryRepository $categoryRepository
+        )
+    {}
+
     #[Route('/', name: 'app_product_index', methods: ['GET'])]
-    public function index(ProductRepository $productRepository): Response
+    public function index(): Response
     {
         return $this->render('product/index.html.twig', [
-            'products' => $productRepository->findAll(),
+            'products' => $this->productRepository->findAll(),
+            'categories' =>  $this->categoryRepository->findAll(),
         ]);
     }
+
+    #[Route('/categorie/{id}', name: 'app_categorie_index', methods: ['GET'])]
+    public function categories(Category $category)
+    {
+
+        return $this->render('product/index.html.twig', [
+            'products' => $this->productRepository->findBy(['productCategory' => $category]),
+            'categories' =>  $this->categoryRepository->findAll(),
+        ]);
+    }
+
 
     #[Route('/new', name: 'app_product_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProductRepository $productRepository): Response
@@ -40,15 +62,17 @@ class ProductController extends AbstractController
         ]);
     }
 
+    /*
     #[Route('/{id}', name: 'app_product_show', methods: ['GET'])]
     public function show(Product $product, ProductRepository $productRepository): Response
     {
 
         return $this->render('product/show.html.twig', [
-            'product' => $product,
+            'product' => $product->findOneBy(['id' => $id]),
             'products' => $productRepository->findAll(),
         ]);
     }
+    */
 
     #[Route('/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
