@@ -1,7 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-$body: lightgray;
+$body: rgb(203, 224, 252);
 body {
     background-color: $body;
 }
