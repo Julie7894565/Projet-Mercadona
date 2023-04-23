@@ -7,8 +7,8 @@
 
 
 <div class="p-4 ">
-<ul class="flex flex-row justify-center gap-8 p-4 text-black-800 font-bold ">
-<li> <a href="{{ path('app_product_index') }} "> Voir toutes les catégories</a></li>
+<ul class="md:flex flex-row justify-center gap-8 p-4 text-blue-700 dark:text-gray-400 font-semibold">
+<li class="first:font-normal"> <a href="{{ path('app_product_index') }} "> Toutes les catégories</a></li>
 {% for category in categories %}
 
 <li> <a href="{{ path('app_categorie_index', { 'id': category.id  }) }} "> {{ category.label }}</a></li>
@@ -18,7 +18,7 @@
 
 
 
- <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+ <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-8 dark:text-gray-400 lg:grid-cols-4 xl:gap-x-8">
      {% for product in products %}
       <div class="group relative gap-8">
         <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
