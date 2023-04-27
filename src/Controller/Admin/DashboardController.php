@@ -58,11 +58,10 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Voir les promotions', 'fas fa-eye', Promotion::class)
         ]);
 
-        yield MenuItem::section('Administrateurs');
-        yield MenuItem::subMenu('Actions', 'fas fa-bars')->setSubItems([
-            MenuItem::linkToCrud('Créer un administrateur', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
-            MenuItem::linkToCrud('Voir les administrateurs', 'fas fa-eye', User::class)
-        ]);
+        yield MenuItem::section('Utilisateurs');
+        yield MenuItem::linkToCrud('Voir les utilisateurs', 'fas fa-eye', User::class);
+            
+        
     }
 }
 
