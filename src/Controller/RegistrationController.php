@@ -30,17 +30,22 @@ class RegistrationController extends AbstractController
                     $user,
                     $form->get('plainPassword')->getData()
                 )
-            );
+            )
+            ->setRoles(['ROLE_USER']);
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
-            return $userAuthenticator->authenticateUser(
+
+            // Authentifie l'utilisateur qui vient d'être crée
+           $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
                 $request
             );
+            
+            // Redirige l'utilisateur
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('registration/register.html.twig', [
