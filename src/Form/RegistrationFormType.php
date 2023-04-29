@@ -32,6 +32,7 @@ class RegistrationFormType extends AbstractType
             ->add('username', TextType::class, [
                 'label' => 'Nom d\'utilisateur'
             ])
+            /*
             ->add('RGPDConsent', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -41,6 +42,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label' => 'En cochant cette case, je reconnais avoir pris connaissance des Conditions Générales d\'utilisation du site ainsi que sa Politique de Confidentialité et je les accepte'
             ])
+            */
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',

@@ -13,8 +13,14 @@ class SecurityController extends AbstractController
 
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser()) {
-             return $this->redirectToRoute('app_home');
+
+        //La tâche donnée consiste à vérifier si l'utilisateur courant est connecté et a le rôle "ROLE_ADMIN". 
+        //Si c'est le cas, on redirige l'utilisateur vers la page d'administration. 
+        //Si l'utilisateur est connecté mais n'a pas le rôle "ROLE_ADMIN", on le redirige vers la page d'accueil de l'application. Voici le code en français :
+        if($this->getUser() != null && in_array("ROLE_ADMIN" , $this->getUser()->getRoles() )){
+            return $this->redirectToRoute('admin');
+        }else if ($this->getUser()) {
+            return $this->redirectToRoute('app_home');
         }
 
         // get the login error if there is one
@@ -25,7 +31,7 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/deconnexion', name: 'app_logout')]
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
