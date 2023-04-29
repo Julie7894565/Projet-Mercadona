@@ -3,15 +3,32 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <h1>Inscription</h1>
+<div class="w-full max-w-xs">
+    <h1 class="text-center text-xl p-4">Inscription</h1>
+
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
+        <div class="p-4">
+        {{ form_row (registrationForm.username) }}
+        </div>
+        <div class="p-4">
         {{ form_row(registrationForm.name) }}
+        </div>
+        <div class="p-4">
         {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.email) }}        
+        </div>
+        <div class="p-4">
+        {{ form_row(registrationForm.email) }}   
+        </div> 
+        <div class="p-4"> 
         {{ form_row(registrationForm.plainPassword) }}
-
-        <button type="submit" class="btn">M'inscrire</button>
+        </div> 
+        
+        <div class="p-4"> 
+        <button type="submit" class="btn p-2">M'inscrire</button>
+        </div> 
     {{ form_end(registrationForm) }}
+</div>
+
+
 {% endblock %}
