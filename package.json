@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "flowbite": "^1.6.5",
-        "heroku-client": "^3.1.0"
+        "heroku-client": "^3.1.0",
+        "postcss": "^8.1.0"
     }
 }
