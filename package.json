@@ -21,9 +21,8 @@
     "scripts": {
         "dev-server": "encore dev-server",
         "dev": "encore dev",
-        "build": "webpack -p --config ./resources/webpack/webpack.config.js --display-error-details",
-        "watch": "webpack -d --watch --config ./resources/webpack/webpack.config.js --display-error-details",
-        "heroku-postbuild": "webpack -p --config ./resources/webpack/webpack.config.js"
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
     },
     "dependencies": {
         "@types/node": "^18.16.3",
@@ -32,9 +31,5 @@
         "postcss": "^8.1.0",
         "ts-node": "^10.9.1",
         "typescript": "^5.0.4"
-    },
-    "engines": {
-        "node": "14.17.x",
-        "npm": "6.14.x"
     }
 }
