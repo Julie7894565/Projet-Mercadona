@@ -62,18 +62,6 @@ class ProductController extends AbstractController
         ]);
     }
 
-    /*
-    #[Route('/{id}', name: 'app_product_show', methods: ['GET'])]
-    public function show(Product $product, ProductRepository $productRepository): Response
-    {
-
-        return $this->render('product/show.html.twig', [
-            'product' => $product->findOneBy(['id' => $id]),
-            'products' => $productRepository->findAll(),
-        ]);
-    }
-    */
-
     #[Route('/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
     {

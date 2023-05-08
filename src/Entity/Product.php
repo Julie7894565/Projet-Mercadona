@@ -5,8 +5,6 @@ namespace App\Entity;
 use App\Entity\Category;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProductRepository;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
