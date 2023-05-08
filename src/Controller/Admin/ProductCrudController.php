@@ -34,6 +34,7 @@ class ProductCrudController extends AbstractCrudController
                 ->setBasePath(self::PRODUCTS_BASE_PATH)
                 ->setUploadDir(self::PRODUCTS_UPLOAD_DIR),
             AssociationField::new('productCategory', 'Catégorie'),
+            AssociationField::new('productPromotion', 'Promotion'),
         ];
     } 
 }
