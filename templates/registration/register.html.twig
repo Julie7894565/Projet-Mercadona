@@ -3,32 +3,62 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
+{{ form_start(registrationForm) }}
+
+<h1 class="text-center text-xl p-4">Inscription</h1>
 <div class="w-full max-w-xs">
-    <h1 class="text-center text-xl p-4">Inscription</h1>
+    
+<div>
+  <div class="p-2">
+    {{ form_label(registrationForm.username) }}
+    <div>
+    {{ form_widget(registrationForm.username) }}
+    </div>
+  </div>
 
+  <div class="p-2">
+    {{ form_label(registrationForm.name) }}
+    <div>
+    {{ form_widget(registrationForm.name) }}
+    </div>
+  </div>
 
-    {{ form_start(registrationForm) }}
-        <div class="p-4">
-        {{ form_row (registrationForm.username) }}
-        </div>
-        <div class="p-4">
-        {{ form_row(registrationForm.name) }}
-        </div>
-        <div class="p-4">
-        {{ form_row(registrationForm.firstname) }}
-        </div>
-        <div class="p-4">
-        {{ form_row(registrationForm.email) }}   
-        </div> 
-        <div class="p-4"> 
-        {{ form_row(registrationForm.plainPassword) }}
-        </div> 
-        
-        <div class="p-4"> 
-        <button type="submit" class="btn p-2">M'inscrire</button>
-        </div> 
-    {{ form_end(registrationForm) }}
+  <div class="p-2">
+    {{ form_label(registrationForm.firstname) }}
+    <div>
+    {{ form_widget(registrationForm.firstname) }}
+    </div>
+  </div>
+
+  <div class="p-2">
+    {{ form_label(registrationForm.email) }}
+    <div>
+    {{ form_widget(registrationForm.email) }}
+    </div>
+  </div>
+
+  <div class="p-2">
+    {{ form_label(registrationForm.plainPassword.first) }}
+    <div>
+    {{ form_widget(registrationForm.plainPassword.first) }}
+    </div>
+  </div>
+
+  <div class="p-2">
+    {{ form_label(registrationForm.plainPassword.second) }}
+    <div>
+    {{ form_widget(registrationForm.plainPassword.second) }}
+    </div>
+  </div>
 </div>
+  <div class="p-2"> 
+     <button type="submit" class="btn p-2">M'inscrire</button>
+  </div> 
+  </div>
+
+
+
+
 
 
 {% endblock %}
