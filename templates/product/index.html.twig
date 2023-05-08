@@ -22,7 +22,7 @@
      {% for product in products %}
       <div class="group relative gap-8">
         <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-          <img src="{{ product.picture}}" alt="" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+          <img src="{{ app_pictures_dir }}/{{ product.picture }}" alt="" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
         </div>
         <div class="mt-4 flex justify-between">
           <div>
@@ -41,7 +41,7 @@
            <p class="m-2 text-md  text-red-500 font-bold">  {{ product.price}} €</p>
              {%endif %}
           </div>
-          <p class="text-sm font-medium text-gray-900">{{ product.description }}</p>        
+          <p class="text-sm font-medium text-gray-900">{{ product.description | raw }}</p>        
       
       </div>
      
