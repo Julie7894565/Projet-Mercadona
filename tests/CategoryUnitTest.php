@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Entity;
+namespace App\Tests;
 
 use App\Entity\Category;
 use App\Entity\Product;

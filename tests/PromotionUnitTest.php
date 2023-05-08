@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Entity;
+namespace App\Tests;
 
 use App\Entity\Promotion;
 use PHPUnit\Framework\TestCase;
