@@ -5,49 +5,43 @@
 {% block body %}
 
 
-
 <div class="p-4 ">
-<ul class="md:flex flex-row justify-center gap-8 p-4  dark:text-black-400 font-semibold">
-<li class="first:font-normal"> <a href="{{ path('app_product_index') }} "> Toutes les catégories</a></li>
-{% for category in categories %}
+    <ul class="md:flex flex-row justify-center gap-8 p-4  dark:text-black-400 font-semibold">
+        {# <li class="first:font-normal"> <a href="{{ path('app_product_index') }} "> Toutes les catégories</a></li> #}
+        <li class="all-categories first:font-normal">Toutes les catégories</li>
+        {% for category in categories %}
+            <li data-id="{{ category.id }}" class="category-button"> {{ category.label }} </li>
+        {% endfor %}
 
-<li> <a href="{{ path('app_categorie_index', { 'id': category.id  }) }} "> {{ category.label }}</a></li>
-{% endfor %}
+    </ul>
 
-</ul>
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-8 dark:text-gray-400 lg:grid-cols-4 xl:gap-x-8">
+        {% for product in products %}
+            <div class="group relative gap-8 toto" data-category="{{product.productCategory.id}}">
+                <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                    <img src="{{ app_pictures_dir }}/{{ product.picture }}" alt="" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                </div>
+                <div class="mt-4 flex justify-between">
+                    <div>
+                        <h3 class="text-md text-gray-700">
+                            <a href="#">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                {{ product.label }}
+                            </a>
+                        </h3>
+                    </div>
+                    {% if product.productPromotion.promotionPercentage is defined %}
+                        <p class="m-2 text-md text-grey-500 line-through ">{{ product.price }} €</p>
+                        {% set promoPrice = product.price * product.productPromotion.promotionPercentage  / 100 %}
+                        <p class="m-2 text-md  text-red-500 font-bold">  {{ product.price - promoPrice}} €</p>
+                    {% else %}
+                        <p class="m-2 text-md  text-red-500 font-bold">  {{ product.price}} €</p>
+                    {%endif %}
+                </div>
+                <p class="text-sm font-medium text-gray-900">{{ product.description | raw }}</p>
 
+            </div>
 
+        {% endfor %}
 
- <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-8 dark:text-gray-400 lg:grid-cols-4 xl:gap-x-8">
-     {% for product in products %}
-      <div class="group relative gap-8">
-        <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-          <img src="{{ app_pictures_dir }}/{{ product.picture }}" alt="" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-        </div>
-        <div class="mt-4 flex justify-between">
-          <div>
-            <h3 class="text-md text-gray-700">
-              <a href="#">
-                <span aria-hidden="true" class="absolute inset-0"></span>
-               {{ product.label }}
-              </a>
-            </h3>
-           </div>
-         {% if product.productPromotion.promotionPercentage is defined %}
-          <p class="m-2 text-md text-grey-500 line-through ">{{ product.price }} €</p>
-          {% set promoPrice = product.price * product.productPromotion.promotionPercentage  / 100 %}
-             <p class="m-2 text-md  text-red-500 font-bold">  {{ product.price - promoPrice}} €</p>
-             {% else %}
-           <p class="m-2 text-md  text-red-500 font-bold">  {{ product.price}} €</p>
-             {%endif %}
-          </div>
-          <p class="text-sm font-medium text-gray-900">{{ product.description | raw }}</p>        
-      
-      </div>
-     
-       {% endfor %}
-    
-
-
-
-{% endblock %}
+        {% endblock %}

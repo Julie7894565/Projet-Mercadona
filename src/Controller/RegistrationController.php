@@ -31,19 +31,19 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             )
-            ->setRoles(['ROLE_USER']);
+                ->setRoles(['ROLE_USER']);
 
             $entityManager->persist($user);
             $entityManager->flush();
 
 
             // Authentifie l'utilisateur qui vient d'être crée
-           $userAuthenticator->authenticateUser(
+            $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
                 $request
             );
-            
+
             // Redirige l'utilisateur
             return $this->redirectToRoute('app_home');
         }
