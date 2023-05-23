@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  if(allCategories.length > 0){
   // Ajouter un écouteur d'événement au bouton allCategories
   allCategories[0].addEventListener("click", function () {
     afficherToutesLesCategories();
@@ -37,5 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     });
+  }
   }
 });
